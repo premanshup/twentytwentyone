@@ -12,15 +12,13 @@
  */
 
 /**
- * Prevent switching to the theme on old versions of WordPress.
- *
- * Switches to the default theme.
+ * Display upgrade notice on theme switch.
  *
  * @since 1.0.0
+ *
+ * @return void
  */
 function twenty_twenty_one_switch_theme() {
-	switch_theme( WP_DEFAULT_THEME );
-	unset( $_GET['activated'] ); // phpcs:ignore WordPress.Security.NonceVerification
 	add_action( 'admin_notices', 'twenty_twenty_one_upgrade_notice' );
 }
 add_action( 'after_switch_theme', 'twenty_twenty_one_switch_theme' );
@@ -34,12 +32,14 @@ add_action( 'after_switch_theme', 'twenty_twenty_one_switch_theme' );
  * @since 1.0.0
  *
  * @global string $wp_version WordPress version.
+ *
+ * @return void
  */
 function twenty_twenty_one_upgrade_notice() {
 	echo '<div class="error"><p>';
 	printf(
-		/* Translators: %s: WordPress Version. */
-		esc_html__( 'This theme requires at least WordPress version 5.3. You are running version %s. Please upgrade and try again.', 'twentytwentyone' ),
+		/* translators: %s: WordPress Version. */
+		esc_html__( 'This theme requires WordPress 5.3 or newer. You are running version %s. Please upgrade.', 'twentytwentyone' ),
 		esc_html( $GLOBALS['wp_version'] )
 	);
 	echo '</p></div>';
@@ -51,12 +51,14 @@ function twenty_twenty_one_upgrade_notice() {
  * @since 1.0.0
  *
  * @global string $wp_version WordPress version.
+ *
+ * @return void
  */
 function twenty_twenty_one_customize() {
 	wp_die(
 		sprintf(
-			/* Translators: %s: WordPress Version. */
-			esc_html__( 'This theme requires at least WordPress version 5.3. You are running version %s. Please upgrade and try again.', 'twentytwentyone' ),
+			/* translators: %s: WordPress Version. */
+			esc_html__( 'This theme requires WordPress 5.3 or newer. You are running version %s. Please upgrade.', 'twentytwentyone' ),
 			esc_html( $GLOBALS['wp_version'] )
 		),
 		'',
@@ -73,13 +75,15 @@ add_action( 'load-customize.php', 'twenty_twenty_one_customize' );
  * @since 1.0.0
  *
  * @global string $wp_version WordPress version.
+ *
+ * @return void
  */
 function twenty_twenty_one_preview() {
 	if ( isset( $_GET['preview'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 		wp_die(
 			sprintf(
-				/* Translators: %s: WordPress Version. */
-				esc_html__( 'This theme requires at least WordPress version 5.3. You are running version %s. Please upgrade and try again.', 'twentytwentyone' ),
+				/* translators: %s: WordPress Version. */
+				esc_html__( 'This theme requires WordPress 5.3 or newer. You are running version %s. Please upgrade.', 'twentytwentyone' ),
 				esc_html( $GLOBALS['wp_version'] )
 			)
 		);

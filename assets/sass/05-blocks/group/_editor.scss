@@ -1,7 +1,32 @@
 .wp-block-group {
+	// Start IE clearfix.
+	// This hack is only necessary because we want to support IE11.
+	// If we don't want to support IE11, then "display: flow-root" would suffice.
+	display: block;
+	clear: both;
+
+	display: flow-root; // stylelint-disable-line declaration-block-no-duplicate-properties
+
+	&:before,
+	&:after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+	// End IE clearfix.
 
 	&.has-background {
 		padding: var(--global--spacing-vertical);
+	}
+
+	// Block Styles
+	&.is-style-twentytwentyone-border {
+		border: calc(3 * var(--separator--height)) solid var(--global--color-border);
+		padding: var(--global--spacing-vertical);
+	}
+
+	.wp-block-group__inner-container *:last-child {
+		margin-bottom: 0;
 	}
 }
 

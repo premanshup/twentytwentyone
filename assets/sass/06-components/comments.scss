@@ -25,6 +25,7 @@
 		}
 
 		.fn {
+			display: inline-block;
 			padding-left: 85px;
 		}
 
@@ -52,26 +53,11 @@
 	small {
 
 		a {
-			border-color: transparent;
-			color: currentColor;
 			font-family: var(--global--font-secondary);
 			font-size: var(--global--font-size-xs);
 			font-style: normal;
 			font-weight: normal;
 			letter-spacing: normal;
-
-			&:hover,
-			&:focus {
-				color: var(--global--color-primary-hover);
-			}
-
-			&:hover {
-				border-color: var(--global--color-secondary);
-			}
-
-			&:active {
-				color: currentColor;
-			}
 		}
 	}
 }
@@ -140,30 +126,13 @@
 
 	.comment-metadata {
 		color: var(--global--color-primary);
-		font-size: var(--global--font-size-sm);
+		font-size: var(--global--font-size-xs);
 		padding: 8px 0 9px 0;
 
 		.edit-link {
 			margin-left: var(--global--spacing-horizontal);
 		}
 
-		a {
-			color: currentColor;
-			border-color: transparent;
-
-			&:hover,
-			&:focus {
-				color: var(--global--color-primary-hover);
-			}
-
-			&:hover {
-				border-color: var(--global--color-secondary);
-			}
-
-			&:active {
-				color: currentColor;
-			}
-		}
 	}
 
 	@include media(mobile) {
@@ -244,7 +213,6 @@
 	padding-top: 3px;
 
 	.url {
-		border-bottom: none;
 		color: currentColor;
 	}
 }
@@ -270,11 +238,16 @@
 	.comment-form-email {
 		flex-basis: 0;
 		flex-grow: 1;
+
+		@include media(mobile-only) {
+			flex-basis: 100%;
+		}
 	}
 
 	.comment-form-cookies-consent > label,
 	.comment-notes {
 		font-size: var(--global--font-size-xs);
+		font-weight: normal;
 	}
 }
 
@@ -298,7 +271,7 @@
 		font-size: var(--global--font-size-sm);
 		margin-bottom: calc(.5 * var(--global--spacing-unit));
 		width: 100%;
-		font-weight: 500;
+		font-weight: var(--form--label-weight);
 	}
 
 	&.comment-form-cookies-consent {
@@ -315,15 +288,5 @@
 		&.logged-in-as {
 			display: block;
 		}
-	}
-}
-
-// Comment navigation
-.comment-navigation {
-
-	a {
-		font-family: var(--global--font-primary);
-		font-size: var(--global--font-size-md);
-		font-weight: 600;
 	}
 }

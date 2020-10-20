@@ -13,40 +13,30 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<?php
-		if ( is_singular() ) :
-			the_title( '<h1 class="entry-title default-max-width">', '</h1>' );
-		else :
-			the_title( sprintf( '<h2 class="entry-title default-max-width"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' );
-		endif;
-		?>
-	</header><!-- .entry-header -->
+		<?php if ( is_singular() ) : ?>
+			<?php the_title( '<h1 class="entry-title default-max-width">', '</h1>' ); ?>
+		<?php else : ?>
+			<?php the_title( sprintf( '<h2 class="entry-title default-max-width"><a href="%s">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+		<?php endif; ?>
 
-	<?php twenty_twenty_one_post_thumbnail(); ?>
+		<?php twenty_twenty_one_post_thumbnail(); ?>
+	</header><!-- .entry-header -->
 
 	<div class="entry-content">
 		<?php
 		the_content(
-			sprintf(
-				wp_kses(
-					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'twentytwentyone' ),
-					array(
-						'span' => array(
-							'class' => array(),
-						),
-					)
-				),
-				get_the_title()
-			)
+			twenty_twenty_one_continue_reading_text()
 		);
 
 		wp_link_pages(
 			array(
-				'before' => '<div class="page-links">' . __( 'Pages:', 'twentytwentyone' ),
-				'after'  => '</div>',
+				'before'   => '<nav class="page-links" aria-label="' . esc_attr__( 'Page', 'twentytwentyone' ) . '">',
+				'after'    => '</nav>',
+				/* translators: %: page number. */
+				'pagelink' => esc_html__( 'Page %', 'twentytwentyone' ),
 			)
 		);
+
 		?>
 	</div><!-- .entry-content -->
 
